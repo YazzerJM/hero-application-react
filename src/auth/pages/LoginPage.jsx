@@ -1,11 +1,19 @@
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 
 export const LoginPage = () => {
 
   const navigate = useNavigate();
 
+  const { login } = useContext(AuthContext);
+
   const onLogin = () => {
-    navigate('/', {
+    const lastPath = localStorage.getItem('lastPath') || '/';
+
+    login('Yasser Jimenez');
+
+    navigate(lastPath, {
       replace: true
     });
   }
@@ -17,7 +25,7 @@ export const LoginPage = () => {
 
       <button
         className="btn btn-primary"
-        onClick={ onLogin }
+        onClick={onLogin}
       >
         Login
       </button>
